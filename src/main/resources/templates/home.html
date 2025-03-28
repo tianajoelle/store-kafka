@@ -1,0 +1,22 @@
+<html xmlns:th="https://www.thymeleaf.org" >
+    <body>
+    	<p th:if="${errorMessage}"><span th:text="${errorMessage}"></span></p>
+    	<p th:if="${success}"><span th:text="${success}"></span></p>
+        <h1>Inscription</h1>
+        <form action="/store/registration" method="post">
+        Email:<input type="text" name="email"><br/>
+        Mot de passe:<input type="password" name="password"><br/>
+        Nom:<input type="text" name="name" required><br/>
+        Prénom:<input type="text" name="firstName" required><br/>
+        <button type="submit">S'inscrire</button>
+        </form>
+        
+        <h1>Connexion</h1>
+        <form action="/store/login" method="post">
+        Email:<input  name="email"><br/>
+        Mot de passe:<input  type = "password" name="password"><br/>
+        <button type="submit">Connexion</button>
+        <p th:if="${errorMessage1}"><span th:text="${errorMessage1}"></span></p>
+        </form>
+        
+    </body>
