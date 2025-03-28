@@ -40,11 +40,16 @@ public class ArticlesService implements ArticlesItf{
     }
     
     public void validate(Long id) {
-    	Optional<Commande> commandeOpt = cdeRepo.findById(id);
-        
+        Optional<Commande> commandeOpt = cdeRepo.findById(id);
         if (commandeOpt.isPresent()) {
-            // Envoi du message Kafka pour signaler la validation de la commande
-            kafkaProducer.produce("Commande validée : " + id);
+            Commande commande = commandeOpt.get();
+            List<Articles> articles = repo.findByCommandeId(id);
+
+
+            for (Articles article : articles) {
+                // Envoi de l'objet Articles à Kafka pour chaque article de la commande
+                kafkaProducer.produce(article);
+            }
         } else {
             throw new RuntimeException("Commande non trouvée");
         }
