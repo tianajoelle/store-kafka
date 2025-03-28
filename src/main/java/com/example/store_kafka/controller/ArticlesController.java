@@ -113,8 +113,7 @@ public class ArticlesController {
         
         if (commandeOpt.isPresent()) {
             Commande commande = commandeOpt.get();
-            
-            // Simulation de la validation
+
             articleService.validate(id);
             
             // Suppression après validation
